@@ -7,10 +7,12 @@ exports.default = {
                 books: 'this is a book'
             }
         });
+        return;
     }),
     create: ((req, res) => {
         res.status(200).json({
-            message: 'created'
+            message: 'created books'
         });
+        return;
     })
 };

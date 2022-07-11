@@ -9,10 +9,12 @@ export default {
         books: 'this is a book'
       }
     })
+    return
   }),
   create: ((req: Request, res: Response) => {
     res.status(200).json({
-      message: 'created'
+      message: 'created books'
     })
+    return
   })
 }
