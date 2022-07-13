@@ -9,18 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.create = void 0;
+exports.getAll = void 0;
 const books_1 = require("../class/books");
-function create(req, res, next) {
-    var _a;
+function getAll(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, image, userUid, price, category, count } = req.body;
         const books = new books_1.__Books();
-        const { uid } = (_a = res.locals.user) !== null && _a !== void 0 ? _a : '';
-        const _book = { name, image, userUid, price, category };
-        yield books.create(_book, count, uid);
+        const book = yield books.getBooks();
+        res.locals.books = book;
         next();
         return;
     });
 }
-exports.create = create;
+exports.getAll = getAll;

@@ -5,9 +5,7 @@ import { Request,Response } from 'express'
 export default {
   books: ((req: Request, res: Response) => {
     res.status(200).json({
-      message: {
-        books: 'this is a book'
-      }
+      books: res.locals.books
     })
     return
   }),

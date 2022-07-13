@@ -7,8 +7,8 @@ export interface IBook {
 } 
 
 export interface IBooks {
-  create(book: IBook, count: number): Promise<void>,
-  getBooks(): void
+  create(book: IBook, count: number, uid: string): Promise<void>,
+  getBooks(): Promise<any>
 }
 
 
