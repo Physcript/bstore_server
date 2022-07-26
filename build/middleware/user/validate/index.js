@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Validate = void 0;
 const User_1 = __importDefault(require("../../../model/User"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 class Validate {
     constructor(error = {}) {
         this.error = error;
@@ -41,6 +42,11 @@ class Validate {
             return this.error;
         });
     }
-    login() { }
+    login(password = '', encPassword = '') {
+        return __awaiter(this, void 0, void 0, function* () {
+            const isMatch = yield bcrypt_1.default.compare(password, encPassword);
+            return isMatch;
+        });
+    }
 }
 exports.Validate = Validate;

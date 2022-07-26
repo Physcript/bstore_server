@@ -43,7 +43,12 @@ class __User extends _User {
             return;
         });
     }
-    login() { }
+    // wrong make of class
+    login(email, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return;
+        });
+    }
     logout() { }
     find() { }
 }

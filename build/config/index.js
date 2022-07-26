@@ -14,5 +14,7 @@ exports.default = {
             wtimeoutMS: 50000
         }
     },
-    private: {}
+    private: {
+        login: process.env.LOGINTOKEN
+    }
 };

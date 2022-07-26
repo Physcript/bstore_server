@@ -8,30 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.byEmail = exports.byToken = exports.byUid = void 0;
-const User_1 = __importDefault(require("../../../model/User"));
-function byUid(uid) {
+exports.logout = void 0;
+const search_1 = require("./search");
+function logout(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = yield User_1.default.findOne({ uid });
-        return user;
+        const { uid } = req.body;
+        const user = yield (0, search_1.byUid)(uid);
+        if (!user) {
+            res.status(401).json({
+                message: 'UnAuthorized'
+            });
+            return;
+        }
+        user.token = '';
+        yield user.save();
+        next();
+        return;
     });
 }
-exports.byUid = byUid;
-function byToken(token) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const user = yield User_1.default.findOne({ token });
-        return user;
-    });
-}
-exports.byToken = byToken;
-function byEmail(email) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const user = yield User_1.default.findOne({ email });
-        return user;
-    });
-}
-exports.byEmail = byEmail;
+exports.logout = logout;

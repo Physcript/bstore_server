@@ -1,5 +1,6 @@
 export interface IBook {
   name: string,
+  description: string,
   image: string,
   userUid: string,
   price: number,

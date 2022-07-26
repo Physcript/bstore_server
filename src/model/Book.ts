@@ -7,6 +7,10 @@ const bookSchema = new  mongoose.Schema({
     type: String,
     lowercase: true
   },
+  description: {
+    type: String,
+    lowercase: true
+  },
   image: {
     type: String,
   },

@@ -11,7 +11,7 @@ import { uid } from '../functions/create'
 
 abstract class _User {
   abstract create(user: Partial<IUser>): Promise<void> 
-  abstract login(): void 
+  abstract login(email: string, password: string): Promise<void> 
   abstract logout(): void 
   abstract find(): void
 }
@@ -45,8 +45,11 @@ export class __User extends _User {
     await data.save()
     return 
   }
-
-  public login(): void {}
+  // wrong make of class
+  public async login(email: string,password: string): Promise<void> {
+     
+    return
+  }
   public logout(): void {}
   public find(): void {}
 

@@ -15,6 +15,6 @@ export default {
     }
   },
   private: {
-
+    login: process.env.LOGINTOKEN 
   }
 }

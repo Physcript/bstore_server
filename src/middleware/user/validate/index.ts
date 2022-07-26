@@ -1,11 +1,12 @@
 import User from '../../../model/User'
 import validator  from 'validator'
+import bcrypt from 'bcrypt'
 
 import { IUser } from '../../../interface/user'
 
 interface IValidate {
   create(user: Partial<IUser>): Promise<any>;
-  login(): void;
+  login(password: string , encPassword: string): Promise<boolean>;
 }
 
 export class Validate implements IValidate {
@@ -49,7 +50,10 @@ export class Validate implements IValidate {
 
   }
 
-  login(){}
+  async login(password: string = '', encPassword: string = ''): Promise<boolean>{
+    const isMatch = await bcrypt.compare(password,encPassword)
+    return isMatch
+  }
 
 }
 

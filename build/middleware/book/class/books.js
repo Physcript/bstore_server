@@ -18,10 +18,11 @@ const quantity_1 = require("../../quantity/class/quantity");
 class __Books {
     create(book, count, uid) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { name, image, userUid, price, category } = book;
+            const { name, description, image, userUid, price, category } = book;
             const quantity = new quantity_1.__Quantity();
             const _book = new Book_1.default({
                 name,
+                description,
                 image,
                 userUid,
                 price,
@@ -39,6 +40,7 @@ class __Books {
                     $project: {
                         "_id": "$_id",
                         "name": "$name",
+                        "description": "$description",
                         "image": "$image",
                         "price": "$price",
                         "category": ["$category"],
@@ -60,6 +62,7 @@ class __Books {
                     $project: {
                         "_id": 1,
                         "name": 1,
+                        "description": 1,
                         "image": 1,
                         "price": 1,
                         "category": 1,

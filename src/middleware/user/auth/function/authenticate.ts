@@ -8,6 +8,7 @@ export async function authenticate(req: Request, res: Response, next: NextFuncti
   const token = req.headers.token ?? ''
   const uid = req.body.uid ?? ''
   
+
   let user
 
   const __auth = new __Auth()

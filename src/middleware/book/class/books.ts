@@ -7,10 +7,11 @@ import { __Quantity } from '../../quantity/class/quantity'
 export class __Books implements IBooks {
   
   async create(book: IBook, count: number, uid: string) {
-    const { name,image,userUid,price,category } = book
+    const { name,description,image,userUid,price,category } = book
     const quantity = new __Quantity()  
     const _book = new Book({
       name,
+      description,
       image,
       userUid,
       price,
@@ -27,6 +28,7 @@ export class __Books implements IBooks {
         $project: {
           "_id": "$_id",
           "name": "$name",
+          "description": "$description",
           "image": "$image",
           "price": "$price",
           "category": ["$category"],
@@ -48,6 +50,7 @@ export class __Books implements IBooks {
         $project: {
           "_id": 1,
           "name": 1,
+          "description": 1,
           "image": 1,
           "price": 1,
           "category": 1,

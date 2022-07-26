@@ -14,10 +14,10 @@ const books_1 = require("../class/books");
 function create(req, res, next) {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, image, userUid, price, category, count } = req.body;
+        const { name, image, description, uid, price, category, count } = req.body;
         const books = new books_1.__Books();
-        const { uid } = (_a = res.locals.user) !== null && _a !== void 0 ? _a : '';
-        const _book = { name, image, userUid, price, category };
+        const user = (_a = res.locals.user) !== null && _a !== void 0 ? _a : '';
+        const _book = { name, description, image, userUid: user.uid, price, category, };
         yield books.create(_book, count, uid);
         next();
         return;
