@@ -7,6 +7,12 @@ exports.default = {
         });
         return;
     }),
+    book: ((req, res) => {
+        res.status(200).json({
+            book: res.locals.book
+        });
+        return;
+    }),
     create: ((req, res) => {
         res.status(200).json({
             message: 'created books'

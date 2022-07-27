@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__Books = void 0;
 const Book_1 = __importDefault(require("../../../model/Book"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const quantity_1 = require("../../quantity/class/quantity");
 class __Books {
     create(book, count, uid) {
@@ -71,6 +72,40 @@ class __Books {
                 },
                 {
                     $unwind: "$quantity"
+                }
+            ]);
+            return book;
+        });
+    }
+    getBook(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let _id = new mongoose_1.default.Types.ObjectId(id);
+            const book = yield Book_1.default.aggregate([
+                {
+                    "$match": { "_id": _id }
+                },
+                {
+                    "$lookup": {
+                        "from": "quantities",
+                        "localField": "_id",
+                        "foreignField": "bookId",
+                        "as": "quan"
+                    }
+                },
+                {
+                    "$unwind": "$quan"
+                },
+                {
+                    "$project": {
+                        "_id": "$_id",
+                        "name": "$name",
+                        "image": "$image",
+                        "category": "$category",
+                        "createdAt": "$createdAt",
+                        "updatedAt": "$updatedAt",
+                        "description": "$description",
+                        "quantity": "$quan.count"
+                    }
                 }
             ]);
             return book;

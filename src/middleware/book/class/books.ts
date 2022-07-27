@@ -64,4 +64,40 @@ export class __Books implements IBooks {
     return book
   }
 
+
+  async getBook(id: string){
+
+    let _id = new mongoose.Types.ObjectId(id)
+
+    const book = await Book.aggregate([
+      {
+        "$match": { "_id": _id } 
+      },
+      {
+        "$lookup": {
+          "from": "quantities",
+          "localField": "_id",
+          "foreignField": "bookId",
+          "as": "quan"
+        }
+      },
+      {
+        "$unwind": "$quan"
+      },
+      {
+        "$project": {
+          "_id": "$_id",
+          "name": "$name",
+          "image": "$image",
+          "category": "$category",
+          "createdAt": "$createdAt",
+          "updatedAt": "$updatedAt",
+          "description": "$description",
+          "quantity": "$quan.count"
+        }
+      }
+    ])
+    return book
+  }
+
 } 
